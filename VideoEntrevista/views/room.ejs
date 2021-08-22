@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoChat</title>
+    
+
+    <link rel="stylesheet" href="/video-chat/static/css/styles.css">
+    <link rel="stylesheet" href="/video-chat/static/css/bootstrap.min.css">
+
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="/video-chat/static/js/socket.io.min.js"></script>
+    <script src="/video-chat/static/js/font-awesome-all.min.js" ></script> 
+    <script src="/video-chat/static/js/jquery-3.5.1.slim.min.js"></script> 
+    <script src="/video-chat/static/js/popper.min.js"></script> 
+    <script src="/video-chat/static/js/bootstrap.min.js"></script> 
+    <script>
+      const ROOM_ID = '<%= roomId %>';
+      const USUARIO= '<%= usuarioCliente %>';
+    </script>
+</head>
+<body>
+
+    <div class="main">
+      <div class="mainLeft">
+        <div class="mainVideos">
+          <div id="videoGrid"> </div>
+  
+        </div>
+        <div class="mainControls">
+  
+          <div class="mainControlsBlock" style="margin: auto">
+            <div onclick="muteUnmute()" class="mainControlsButton mainMuteButton">
+                <i class="fas fa-microphone"></i>
+                <span>Silenciar</span>
+              </div>
+              <div onclick="playStop()" class="mainControlsButton mainVideoButton">
+                <i class="fas fa-video"></i>
+                <span>Desactivar cámara</span>
+              </div>
+          </div>
+  
+          <div class="mainControlsBlock">
+            <div class="mainControlsButtonEndMeeting" onclick="desconectar()">
+               <span class="leaveMeeting">Salir</span>
+            </div>
+         </div>
+  
+        </div>
+  
+      </div>
+      <div class="mainRight">
+        <div class="mainHeader">
+          <h5>Mensajes de  la llamada</h5>
+        </div>
+        <div class="mainChatWindow">
+          <ul class="messagesContainer">
+          </ul>
+       </div>
+       <div class="messageSendingTo">Para: <span> <%= usuarioCliente %> </span> </div>
+       <div class="mainMessageContainer">
+          <input id="chatMessage" type="text" placeholder="Escribe el mensaje...">
+       </div>
+      
+      </div>
+  </div>
+  </body>
+  <script src="/video-chat/static/js/principal.js"></script>
+</html>

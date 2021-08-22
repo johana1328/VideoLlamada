@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <link rel="shortcut icon" href="/video-chat/static/img/icono.png">
+
+    <title>Video Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/video-chat/static/css/styles.css">
+    <link rel="stylesheet" href="/video-chat/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/video-chat/static/img/logo.jpg" alt="" width="50" height="40" class="d-inline-block align-text-top">
+        Gestión Talento Cmc
+      </a>
+    </div>
+  </nav>
+  <section class="vh-60">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <h1>Bienvenido</h1>
+            <br>
+            <% 
+            var classMsg;
+            var classIcon;
+            var mensaje='OK';
+            switch (msg) {
+              case 'CDACC02':
+                classMsg='alert-secondary';
+                classIcon='fa-exclamation-triangle';
+                mensaje='Código inactivo.';
+                break;
+              case 'CDACC01':
+                classMsg='alert-danger';
+                classIcon=' fa-exclamation-circle';
+                mensaje='Error al realizar conexión.';
+                break;
+              case 'CDACC03':
+                classMsg='alert-danger';
+                classIcon=' fa-exclamation-circle';
+                mensaje='Código de acceso ha caducado.';
+                break;
+              case 'CDACC04':
+                classMsg='alert-danger';
+                classIcon=' fa-exclamation-circle';
+                mensaje='Código de acceso inválido.';
+                break;
+              
+             } 
+             if(mensaje != 'OK'){ %>
+              <div class="alert <%=classMsg%>" role="alert">
+                <i class="fas <%=classIcon%>"></i>
+                <%=mensaje%>
+              </div>   
+             <%}%>
+            
+            <p>Ingresa el código para iniciar la videoconferencia</p>
+            <form method="post" action="/video-chat/room">
+            <div class="form-outline mb-4">
+              <input type="text" id="roomid"  name="roomid" class="form-control form-control-lg"  placeholder="Código" required/>
+              
+            </div>
+            <button type="submit" class="btn btn-lg"
+            style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #283F73; color: #fff;">Ingresar</button>
+  
+          
+
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+ 
+</html>
