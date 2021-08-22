@@ -17,7 +17,7 @@
     <script src="/video-chat/static/js/bootstrap.min.js"></script> 
     <script>
       const ROOM_ID = '<%= roomId %>';
-      const USUARIO= '<%= usuarioCliente %>';
+      const USUARIO= '<%= userLocal %>';
     </script>
 </head>
 <body>
@@ -58,7 +58,7 @@
           <ul class="messagesContainer">
           </ul>
        </div>
-       <div class="messageSendingTo">Para: <span> <%= usuarioCliente %> </span> </div>
+       <div class="messageSendingTo">Para: <span> <%= userRemote %> </span> </div>
        <div class="mainMessageContainer">
           <input id="chatMessage" type="text" placeholder="Escribe el mensaje...">
        </div>

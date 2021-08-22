@@ -24,6 +24,9 @@ app.use(express.json());
 app.use('/video-chat/static',express.static('public'));
 app.set('view engine', 'ejs');
 
+app.get('/', (req, res)=> {
+	res.redirect('/video-chat/');
+});
 
 app.get('/video-chat/',(req, res) =>{
 	res.render('index',{ msg: 'OK'})
@@ -54,10 +57,16 @@ app.get('/video-chat/:room', (req, res) => {
 				let minutos=moment().diff(fechaEntrevista, 'minutes');
 				//-10,120
 				if(minutos>=(-10) && minutos<= 120){
-					let usuario=tipoUsuario=='A'?entrevista.nombre_entrevistador:entrevista.nombre_entrvistado;
+					let usuarioLocal= entrevista.nombre_entrevistado;
+					let usuarioRemoto=entrevista.nombre_entrevistador;
+					if(tipoUsuario=='A'){
+						usuarioLocal= entrevista.nombre_entrevistador;
+						usuarioRemoto=entrevista.nombre_entrevistado;
+					}
 					res.render('room',
-				 { roomId: idEntrevista ,
-				   usuarioCliente: usuario})
+				 			{ roomId: idEntrevista ,
+				   			userLocal: usuarioLocal,
+						userRemote:usuarioRemoto})
 				}else if(minutos<(-10)){
 					res.render('index',{ msg: 'CDACC02'})
 				}else{

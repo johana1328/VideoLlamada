@@ -1,6 +1,7 @@
 const socket = io.connect();
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
+myVideo.setAttribute("id", "videoLocal");
 myVideo.muted = true
 
 var peer = new Peer()
@@ -24,12 +25,13 @@ navigator.mediaDevices
 
 		socket.on('user-connected', (userId) => {
 			connectToNewUser(userId, stream)
-			alert('Somebody connected', userId)
+			//alert('Somebody connected', userId)
 		})
 
 		peer.on('call', (call) => {
 			call.answer(stream)
-			const video = document.createElement('video')
+			const video = document.createElement('video');
+			video.setAttribute("class", "videoRemote");
 			call.on('stream', (userVideoStream) => {
 				addVideoStream(video, userVideoStream)
 			})
@@ -76,8 +78,10 @@ peer.on('open', (id) => {
 })
 
 const connectToNewUser = (userId, stream) => {
+	eliminarRemotos();
 	const call = peer.call(userId, stream)
-	const video = document.createElement('video')
+	const video = document.createElement('video');
+	video.setAttribute("class", "videoRemote");
 	call.on('stream', (userVideoStream) => {
 		addVideoStream(video, userVideoStream)
 	})
@@ -161,4 +165,11 @@ const setPlayVideo = () => {
 function desconectar(){
 	//socket.emit('disconnect');
 	location.href='/video-chat';
+}
+
+function eliminarRemotos(){
+	const elements = document.getElementsByClassName("videoRemote");
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 }
